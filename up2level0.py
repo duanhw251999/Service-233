@@ -11,9 +11,8 @@ paths={'BONC':'E:/PUT_JT_DATA/The_Temp_Data/The_BONC_Data/DAY/'
       }
 
 errdir='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'
-remotedir='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/bak/'
+remotedir='E:/PUT_JT_DATA/The_BWT_Data/DayData/'
 recordfile='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/python0/'
-#recordfile='D:/pythongram/'
 uploaded='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/uploaded/'
 
 #各单位约定数组
@@ -30,7 +29,7 @@ bonc=['DAPD_CLS_SANDTABLE_SYS'
 ,'DAPD_WORKNG_SBT_OPERATION_MNTR'
 ,'DAPD_POS_OPERATION_MNTR'
 ,'DAPD_CREDIT_PHONE_HARASSMENT_V1'
-,'DAPD_CREDIT_PHONE_CHEAT_V2']
+,'DAPD_CREDIT_PHONE_CHEAT_V2','DAPD_CUST_FILECOMPL_SHEET']
 
 hjbd=['DAPD_SVC_TRAIL'
 ,'DAPD_SVC_USER'
