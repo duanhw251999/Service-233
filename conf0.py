@@ -1,0 +1,30 @@
+paths={'BONC':'E:/PUT_JT_DATA/The_Temp_Data/The_BONC_Data/DAY/'
+      ,'HJBD':'E:/PUT_JT_DATA/The_Temp_Data/The_HJBD_Data/DAY/'
+      ,'SQMS':'E:/PUT_JT_DATA/The_Temp_Data/The_SQMS_Data/DAY/'
+      }
+
+errdir='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'
+remotedir='E:/PUT_JT_DATA/The_BWT_Data/DayData/'
+recordfile='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/python0/'
+uploaded='E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/uploaded/'
+
+#各单位约定数组
+sqms=['DAPD_ENTITY_CLS'
+,'DAPD_INST_MBL_MNTNCE'
+,'DAPD_10000_NBR_SVC'
+,'DAPD_CMPLN_DEAL_SVC'
+,'DAPD_WEB_OFFICE'
+,'DAPD_PALM_OFFICE'
+,'DAPD_EXEC_SINGLE'
+,'DAPD_NO_STSFTN_SINGLE']
+
+bonc=['DAPD_CLS_SANDTABLE_SYS'
+,'DAPD_WORKNG_SBT_OPERATION_MNTR'
+,'DAPD_POS_OPERATION_MNTR'
+,'DAPD_CREDIT_PHONE_HARASSMENT_V1'
+,'DAPD_CREDIT_PHONE_CHEAT_V2','DAPD_CUST_FILECOMPL_SHEET']
+
+hjbd=['DAPD_SVC_TRAIL'
+,'DAPD_SVC_USER'
+,'DAPD_SVC_ORD'
+,'DAPD_CHNL_DCTNRY']
