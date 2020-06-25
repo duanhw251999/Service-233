@@ -122,6 +122,7 @@ def deleteEmpty(dirName,errorDir):
     files=os.listdir(dirName)
     for file in files:
         absPath=dirName+file
+        spider_say("Helperl.deleteEmpty>>>%s" % absPath)
         if isExist(absPath)==True:
             if get_FileSize(absPath)==0:
                 spider_say("%s 是空文件，文件大小为0，被移动到错误目录..."%file)
@@ -132,6 +133,7 @@ def notConf(dirName,errorDir):
     for file in files:
         absPath=dirName+file
         datName=file.split(".")[0]
+        spider_say("Helperl.notConf>>>%s"%absPath)
         if datName not in jt.getDAPX("day"):
         	  if datName not in jt.getDAPX("hs_data"):
             		spider_say("%s 并不属于配置中的文件，可能是错误文件，将被移动到错误目录..."%file)
@@ -141,6 +143,7 @@ def formatError(dirName,errorDir):
     files=os.listdir(dirName)
     for file in files:
         absPath=dirName+file
+        spider_say("Helperl.formatError>>>%s" % absPath)
         dn=file.split(".")[0]
         if re.match("^"+dn+"([.]\d{8}){2}([.]\d{2,3})+\d+\.(CHECK|VAL|DAT)(\.gz)?$",file) is None:
             move(absPath,errorDir)
@@ -176,5 +179,10 @@ def timeEque(t2):
     t1=time.strftime('%H%M',time.localtime())
     return t1==t2
 
+#获取文件后缀名
+def suffix(file):
+    sname=os.path.splitext(file)
+    return sname
+
 if __name__ == '__main__':
-    print(monthNow(+1))
+    pass
