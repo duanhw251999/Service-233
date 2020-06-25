@@ -22,21 +22,7 @@ ods_month ods月目录
 bonc_month 东方国信月目录
 kdgc_month 科大月目录
 jt_month 集团月目录
-'''
 
-'''
-paths={"hs_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/The_EDW_Data/DAY/'
-        ,"ods_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/The_ODS_Data/DAY/'
-        ,"jt_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/DayData/'
-        ,'day_err':'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'}
-'''
-paths={"hs_day":'E:/PUT_JT_DATA/The_Temp_Data/The_EDW_Data/DAY/'
-        ,"ods_day":'E:/PUT_JT_DATA/The_Temp_Data/The_ODS_Data/DAY/'
-        ,"jt_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/DayData/'
-        ,'day_err':'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'}
-
-
-'''
 集团数据校验过程：
 1.读取目录中的文件，如果有文件，分别查看CHECK VAL gz文件
     读出CHECK文件中的内容 拼接校验文件名称
@@ -62,6 +48,26 @@ paths={"hs_day":'E:/PUT_JT_DATA/The_Temp_Data/The_EDW_Data/DAY/'
         20190420.20190418  判断是否是华盛数据，如果是，判断账期是否是20190419，如果账期合适通过，如果账期不合适，不通过
 '''
 
+'''
+paths={"hs_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/The_EDW_Data/DAY/'
+        ,"ods_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/The_ODS_Data/DAY/'
+        ,"jt_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/DayData/'
+        ,'day_err':'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'}
+        
+paths={"hs_day":'D:/TEST/PUT_JT_DATA/The_Temp_Data/The_EDW_Data/DAY/'
+        ,"ods_day":'D:/TEST/PUT_JT_DATA/The_Temp_Data/The_ODS_Data/DAY/'
+        ,"jt_day":'D:/TEST/PUT_JT_DATA/The_BWT_Data/DayData/'
+        ,'day_err':'D:/TEST/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'}        
+        
+      
+'''
+
+paths={"hs_day":'E:/PUT_JT_DATA/The_Temp_Data/The_EDW_Data/DAY/'
+        ,"ods_day":'E:/PUT_JT_DATA/The_Temp_Data/The_ODS_Data/DAY/'
+        ,"jt_day":'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/DayData/'
+        ,'day_err':'E:/PUT_JT_DATA/The_Temp_Data/The_TEST_Data/err/'}
+
+
 def arthropoda(path):
     # 0.查看回执文件
     check.check_day()
@@ -74,7 +80,7 @@ def arthropoda(path):
     Helper.formatError(path,paths["day_err"])
     # 4. 剔除非账期的文件
     datDate(path)
-    
+
     files=os.listdir(path)  #读取目录中的所有文件
     if len(files)!=0: #如果目录中有文件
         spider_say("=====扫描到 %s 个文件" %(len(files)))
@@ -87,8 +93,9 @@ def arthropoda(path):
     else:
         spider_say("=====扫描到 %s 个文件" %(len(files)))
 
-    
+
 def checkFileOper(absPath):
+
     [dirname,filename]=os.path.split(absPath)
     (datName,d1,d2,d3)=(filename.split('.')[0],filename.split('.')[1],filename.split('.')[2],Helper.dateNow(0))
     # if Helper.dateOper(d1,d3)==1 and Helper.dateOper(d3,d2)==1:
@@ -108,7 +115,7 @@ def checkFileOper(absPath):
         count_check=len(vals)#文件个数 根据check文件中的记录行数计算得出
         count_valngz=0
         for val in vals:
-            absValPath=dirname+"\\"+val
+            absValPath=dirname+"/"+val
             if Helper.isExist(absValPath)==True: #如果val文件存在
                 obj=readVal(absValPath)#通过方法返回对象并赋值给新对象
                 if obj!=None:
@@ -130,7 +137,8 @@ def readCheck(file):
             line=f.readline()
             while line:
                 l=line.rstrip('\n')
-                vals.append(l.replace("DAT","VAL"))
+                #vals.append(l.replace("DAT","VAL"))
+                vals.append(Helper.suffix(l)[0] + ".VAL")
                 line=f.readline()
     return vals
 
@@ -195,15 +203,15 @@ def datDate(path):
     files=os.listdir(path)
     for f in files:
         absPath=path+f
+        spider_say("datDate>>>%s"%absPath)
         dn=f.split('.')[0]
         d1=f.split('.')[1]
         d2=f.split(".")[2]
-        dc=Helper.dateOper(d1,d2)
+        dc=Helper.dateOper(d1,d2)#日期差
         if dc==1 or dc==0:
             if Helper.dateNow(-1)==d2:
-                pass
-                # spider_say("%s--当前账期是%s,文件的账期是%s ,[%s],文件可以上传" %(f,Helper.dateNow(-1),d2,dc))
-                # Helper.move(absPath,paths["jt_day"])
+                spider_say("%s--当前账期是%s,文件的账期是%s ,[%s],文件可以上传" %(f,Helper.dateNow(-1),d2,dc))
+                #Helper.move(absPath,paths["jt_day"])
         elif dc==2:
             if dn in jt.getDAPX("hs_data"):
                 #pass
